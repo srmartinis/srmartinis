@@ -1,86 +1,62 @@
+
 <html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de Pelota en Canvas</title>
+    <title>Viaje a las Estrellas</title>
     <style>
         body {
             margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+            overflow: hidden;
         }
 
         canvas {
-            border: 1px solid #000;
-            touch-action: none; /* Evitar el comportamiento táctil predeterminado */
+            display: block;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="100%" height="100%"></canvas>
+    <canvas id="starCanvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('gameCanvas');
+        const canvas = document.getElementById('starCanvas');
         const ctx = canvas.getContext('2d');
 
-        // Posición inicial de la pelota
-        let x = canvas.width / 2;
-        let y = canvas.height / 2;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        // Velocidad y dirección inicial
-        let dx = 2;
-        let dy = -2;
+        function drawStars() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Radio de la pelota
-        const ballRadius = 10;
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const radius = Math.random() * 2;
 
-        function drawBall() {
-            ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = '#0095DD';
-            ctx.fill();
-            ctx.closePath();
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFF';
+                ctx.fill();
+                ctx.closePath();
+            }
         }
 
         function update() {
-            // Limpiar el lienzo
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Dibujar la pelota
-            drawBall();
-
-            // Mover la pelota
-            x += dx;
-            y += dy;
-
-            // Rebotar en los bordes
-            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-                dx = -dx;
-            }
-
-            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
-                dy = -dy;
-            }
-
-            // Solicitar el siguiente frame de animación
+            drawStars();
             requestAnimationFrame(update);
         }
 
-        // Manejar eventos táctiles
-        canvas.addEventListener('touchstart', handleTouchStart);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
 
-        function handleTouchStart(event) {
-            // Reiniciar la posición de la pelota al tocar la pantalla
-            x = canvas.width / 2;
-            y = canvas.height / 2;
-        }
-
-        // Iniciar el juego
+        // Iniciar el viaje a las estrellas
         update();
     </script>
 </body>
