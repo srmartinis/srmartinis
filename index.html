@@ -1,11 +1,87 @@
 <html>
-    <head></head>
-    ><body>
-        <h1>Este es un sitio web de Martin</h1>
-        <p>El enano va a cobrar y lo voy a partir en el PES </p>
-        <p>
-            <img src="https://i.imgur.com/PfA0M2o.gif">
-        </p>
-        <h1>SALUDA QUE NOS VEMOS</h1>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Pelota en Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        canvas {
+            border: 1px solid #000;
+            touch-action: none; /* Evitar el comportamiento táctil predeterminado */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="100%" height="100%"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Posición inicial de la pelota
+        let x = canvas.width / 2;
+        let y = canvas.height / 2;
+
+        // Velocidad y dirección inicial
+        let dx = 2;
+        let dy = -2;
+
+        // Radio de la pelota
+        const ballRadius = 10;
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = '#0095DD';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function update() {
+            // Limpiar el lienzo
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar la pelota
+            drawBall();
+
+            // Mover la pelota
+            x += dx;
+            y += dy;
+
+            // Rebotar en los bordes
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+            }
+
+            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+                dy = -dy;
+            }
+
+            // Solicitar el siguiente frame de animación
+            requestAnimationFrame(update);
+        }
+
+        // Manejar eventos táctiles
+        canvas.addEventListener('touchstart', handleTouchStart);
+
+        function handleTouchStart(event) {
+            // Reiniciar la posición de la pelota al tocar la pantalla
+            x = canvas.width / 2;
+            y = canvas.height / 2;
+        }
+
+        // Iniciar el juego
+        update();
+    </script>
+</body>
 </html>
