@@ -1,11 +1,9 @@
-
-<html>
-<!DOCTYPE html>
+<html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viaje a las Estrellas</title>
+    <title>Ciclo de Vida de una Planta</title>
     <style>
         body {
             margin: 0;
@@ -20,34 +18,50 @@
     </style>
 </head>
 <body>
-    <canvas id="starCanvas"></canvas>
+    <canvas id="plantCanvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('starCanvas');
+        const canvas = document.getElementById('plantCanvas');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        function drawStars() {
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        let plantHeight = 50;
+        let flowerBloomed = false;
+        let plantColor = '#4CAF50'; // Verde por defecto
 
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const radius = Math.random() * 2;
+        function drawPlant() {
+            ctx.fillStyle = plantColor;
+            ctx.fillRect(canvas.width / 2 - 10, canvas.height - plantHeight, 20, plantHeight);
 
+            if (flowerBloomed) {
+                // Dibujar una flor
                 ctx.beginPath();
-                ctx.arc(x, y, radius, 0, Math.PI * 2);
-                ctx.fillStyle = '#FFF';
+                ctx.arc(canvas.width / 2, canvas.height - plantHeight - 20, 15, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFD700'; // Amarillo para la flor
                 ctx.fill();
                 ctx.closePath();
             }
         }
 
         function update() {
-            drawStars();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawPlant();
+
+            if (!flowerBloomed) {
+                // Hacer crecer la planta hasta que florezca
+                if (plantHeight < canvas.height - 50) {
+                    plantHeight += 1;
+                } else {
+                    flowerBloomed = true;
+                }
+            } else {
+                // Hacer que la flor se seque
+                plantColor = '#A52A2A'; // MarrÃ³n oscuro para representar la planta seca
+            }
+
             requestAnimationFrame(update);
         }
 
@@ -56,7 +70,7 @@
             canvas.height = window.innerHeight;
         });
 
-        // Iniciar el viaje a las estrellas
+        // Iniciar la animaciÃ³n del ciclo de vida de la planta
         update();
     </script>
 </body>
