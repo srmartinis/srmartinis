@@ -1,77 +1,79 @@
 <html><!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciclo de Vida de una Planta</title>
+    <title>Blog sobre los Testigos de JehovÃ¡</title>
     <style>
         body {
-            margin: 0;
-            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #333;
         }
 
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007BFF;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <canvas id="plantCanvas"></canvas>
 
-    <script>
-        const canvas = document.getElementById('plantCanvas');
-        const ctx = canvas.getContext('2d');
+    <header>
+        <h1>Testigos de JehovÃ¡: Obras y Valores</h1>
+    </header>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    <main>
+        <article>
+            <h2>Contribuciones Caritativas</h2>
+            <p>Los Testigos de JehovÃ¡ participan activamente en obras caritativas, brindando ayuda a comunidades necesitadas en todo el mundo.</p>
+        </article>
 
-        let plantHeight = 50;
-        let flowerBloomed = false;
-        let plantColor = '#4CAF50'; // Verde por defecto
+        <article>
+            <h2>Actividades Comunitarias</h2>
+            <p>Explora las diversas actividades comunitarias que los Testigos de JehovÃ¡ organizan para fortalecer la unidad y apoyar a sus vecinos.</p>
+        </article>
 
-        function drawPlant() {
-            ctx.fillStyle = plantColor;
-            ctx.fillRect(canvas.width / 2 - 10, canvas.height - plantHeight, 20, plantHeight);
+        <article>
+            <h2>Valores y Ãtica</h2>
+            <p>Descubre los valores fundamentales que guÃ­an la vida de los Testigos de JehovÃ¡, incluyendo la Ã©tica y el respeto hacia los demÃ¡s.</p>
+        </article>
+    </main>
 
-            if (flowerBloomed) {
-                // Dibujar una flor
-                ctx.beginPath();
-                ctx.arc(canvas.width / 2, canvas.height - plantHeight - 20, 15, 0, Math.PI * 2);
-                ctx.fillStyle = '#FFD700'; // Amarillo para la flor
-                ctx.fill();
-                ctx.closePath();
-            }
-        }
+    <footer>
+        <p>&copy; 2023 Blog sobre los Testigos de JehovÃ¡</p>
+    </footer>
 
-        function update() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            drawPlant();
-
-            if (!flowerBloomed) {
-                // Hacer crecer la planta hasta que florezca
-                if (plantHeight < canvas.height - 50) {
-                    plantHeight += 1;
-                } else {
-                    flowerBloomed = true;
-                }
-            } else {
-                // Hacer que la flor se seque
-                plantColor = '#A52A2A'; // MarrÃ³n oscuro para representar la planta seca
-            }
-
-            requestAnimationFrame(update);
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Iniciar la animaciÃ³n del ciclo de vida de la planta
-        update();
-    </script>
 </body>
 </html>
