@@ -1,61 +1,52 @@
-<html><!DOCTYPE html>
-<html lang="en">
+<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viaje a las Estrellas</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajedrez</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #tablero {
+      display: grid;
+      grid-template-columns: repeat(8, 50px);
+      grid-gap: 1px;
+    }
+    .casilla {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+    .blanca {
+      background-color: #eee;
+    }
+    .negra {
+      background-color: #aaa;
+    }
+  </style>
 </head>
 <body>
-    <canvas id="starCanvas"></canvas>
 
-    <script>
-        const canvas = document.getElementById('starCanvas');
-        const ctx = canvas.getContext('2d');
+<div id="tablero">
+  <!-- RepresentaciÃ³n del tablero -->
+  <!-- Blanco = B, Negro = N -->
+  <div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div>
+  <div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div>
+  <div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div>
+  <div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div>
+  <div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div>
+  <div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div>
+  <div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div><div class="casilla blanca">B</div><div class="casilla negra">N</div>
+</div>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        function drawStars() {
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const radius = Math.random() * 2;
-
-                ctx.beginPath();
-                ctx.arc(x, y, radius, 0, Math.PI * 2);
-                ctx.fillStyle = '#FFF';
-                ctx.fill();
-                ctx.closePath();
-            }
-        }
-
-        function update() {
-            drawStars();
-            requestAnimationFrame(update);
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Iniciar el viaje a las estrellas
-        update();
-    </script>
 </body>
 </html>
